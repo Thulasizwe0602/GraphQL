@@ -1,0 +1,19 @@
+{
+  "name": "life-after-death",
+  "version": "1.0.0",
+  "description": "A Life Cover Restful API Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Thulasizwe0602/life-after-death.git"
+  },
+  "author": "Thulasizwe Mdletshe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Thulasizwe0602/life-after-death/issues"
+  },
+  "homepage": "https://github.com/Thulasizwe0602/life-after-death#readme"
+}
