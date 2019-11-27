@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Thulasizwe0602/life-after-death/issues"
   },
-  "homepage": "https://github.com/Thulasizwe0602/life-after-death#readme"
+  "homepage": "https://github.com/Thulasizwe0602/life-after-death#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
