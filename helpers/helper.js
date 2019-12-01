@@ -1,1 +1,1 @@
-export function dateToString(date) { return new Date(date).toISOString(); }
+exports.dateToString = date => new Date(date).toISOString();
