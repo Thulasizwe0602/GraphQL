@@ -3,6 +3,8 @@ const User = require('../models/user');
 const Permission = require('../models/permission');
 const UserType = require('../models/userType');
 
+const {dateToString} = require('../helpers/helper')
+
 const userTypeFindById = async userTypeId => {
     try {
         const userType = await UserType.findById(userTypeId);
@@ -18,7 +20,7 @@ const permissionFindById = async permissionId => {
         const permission = await Permission.findById(permissionId);
         return {
             ...permission._doc,
-            createdAt: new Date(permission._doc.createdAt).toISOString()
+            createdAt: dateToString(permission._doc.createdAt)
         };
     }
     catch (err) {
@@ -56,8 +58,8 @@ module.exports = {
                 return {
                     ...user._doc,
                     _id: user.id,
-                    createdAt: new Date(user._doc.createdAt).toISOString(),
-                    updatedAt: new Date(user._doc.updatedAt).toISOString(),
+                    createdAt: dateToString(user._doc.createdAt),
+                    updatedAt: dateToString(user._doc.updatedAt),
                     userTypeId: userTypeFindById.bind(this, user._doc.userTypeId),
                     permissionId: permissionFindById.bind(this, user._doc.permissionId)
                 };
