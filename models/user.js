@@ -1,4 +1,4 @@
-const mongoose = request('mongoose');
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
@@ -22,22 +22,28 @@ const userSchema = new Schema({
         type: String,
         required : false
     },
+    isProfileUpdated: {
+        type: Boolean
+    },
+    isActive: {
+        type: Boolean
+    },
     createdAt: {
-        type: Date,
-        required : true
+        type: Date
     },
     updatedAt: {
-        type: Date,
-        required : true
+        type: Date
     },
     userTypeId: {
-        type: Number,
+        type: Schema.Types.ObjectID,
+        ref: 'UserType',
         required : true
     },
-    permissionId: {
-        type: ObjectID(),
+    permissionId: {        
+        type: Schema.Types.ObjectID,
+        ref: 'Permission',
         required : true
     },    
 });
 
-module.exports =mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', userSchema);
