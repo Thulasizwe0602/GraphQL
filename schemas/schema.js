@@ -23,6 +23,12 @@ module.exports = buildSchema(`
             userTypeId: UserType!
             permissionId: Permission!
         }
+
+        type AuthData {
+            userId: ID!
+            token: String!
+            expiration: Int!
+        }
         
         input PermissionInput {
             permissionName: String!
@@ -49,7 +55,9 @@ module.exports = buildSchema(`
             permissions: [Permission]
             userTypes: [UserType]            
             users: [User]
+            login(emailAddress: String!, password: String!): AuthData
         }
+
         type RootMutation {
             createPermission(permissionInput: PermissionInput): Permission
             createUserType(userTypeInput: UserTypeInput): UserType

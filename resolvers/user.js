@@ -1,10 +1,11 @@
 const User = require('../models/user');
-const {dateToString} = require('../helpers/helper');
-const {userType, permission} = require('./resolverHelper');
+const { dateToString } = require('../helpers/helper');
+const { userType, permission } = require('./resolverHelper');
 
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
-module.exports = {         
+module.exports = {
     users: async () => {
         try {
             const users = await User.find();
@@ -22,8 +23,9 @@ module.exports = {
         catch (err) {
             console.log(err);
         }
-     },
-    createUser: async args => {  
+    },
+
+    createUser: async args => {
         try {
             const duplicateUser = await User.findOne({ emailAddress: args.userInput.emailAddress });
             if (duplicateUser) {
@@ -44,7 +46,7 @@ module.exports = {
                 userTypeId: '5de3d5650ed14e442c93402e',
                 permissionId: '5de3c0d7bc849a4cb0088bf3',
             });
-            
+
             let createdUser;
             try {
                 const result = await user.save();
@@ -61,5 +63,27 @@ module.exports = {
             console.log(err);
             throw err;
         }
+    },
+    login: async ({ emailAddress, password }) => {
+        const user = await User.findOne({ emailAddress: emailAddress });
+        if (!user) {
+            throw new Error('User does not exist!');
+        }
+        console.log(user);
+        const isEqual = await bcrypt.compare(password, user.password);
+        if (!isEqual) {
+            throw new Error('Username/Email or password entered are incorrect!!!');
+        }
+
+        let privateKey = 'FO1gVUgiTwmw5nl9Ml3k33FFTblDNDEG';
+        const generatedToekn = jwt.sign({ userId: user.id, emailAddress: user.emailAddress }, privateKey, {
+            expiresIn: '1h'
+        });
+
+        return {
+            userId: user.id,
+            token: generatedToekn,
+            expiration: 1
+        };
     }
 };
