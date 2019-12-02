@@ -5,7 +5,7 @@ module.exports = {
     permissions: async () => {
        try {
             const permissions = await Permission.find();
-            return permissions.map(permission => {
+             return permissions.map(permission => {
                 return { 
                     ...permission._doc,
                     createdAt: dateToString(permission._doc.createdAt)

@@ -1,15 +1,23 @@
-const User = require('../models/user');
-const { dateToString, privateKey } = require('../helpers/helper');
-const { userType, permission } = require('./resolverHelper');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+
+const User = require('../models/user');
+
+const Permission = require('../models/permission');
+const { dateToString, privateKey } = require('../helpers/helper');
+const { userType, permission } = require('./resolverHelper');
 
 const newDate = new Date().toISOString();;
 
 module.exports = {
-    users: async () => {
+    users: async (args, request) => {
         try {
+            // if (!request.isAuthorized) {
+            //     throw new Error('User not authenticated.');
+            // }
+
             const users = await User.find();
+            console.log(users);
             return users.map(user => {
                 return {
                     ...user._doc,
@@ -20,18 +28,27 @@ module.exports = {
                     permissionId: permission.bind(this, user._doc.permissionId)
                 };
             });
+
         }
         catch (err) {
             console.log(err);
         }
     },
 
-    createUser: async args => {
+    createUser: async (args, request) => {
         try {
+            // if (!request.isAuthorized) {
+            //     throw new Error('User not authenticated.');
+            // }
+            
+            // console.log(request.permissionId);
+            // console.log(request.userTypeId);
+
             const duplicateUser = await User.findOne({ emailAddress: args.userInput.emailAddress });
             if (duplicateUser) {
                 throw new Error('Email address already exist in the system.');
             }
+
             const encryptedPassword = await bcrypt.hash(args.userInput.password, 12);
             console.log("Successfully encrypted your password");
 
@@ -66,25 +83,36 @@ module.exports = {
             throw err;
         }
     },
+
     login: async ({ emailAddress, password }) => {
-        const user = await User.findOne({ emailAddress: emailAddress });
-        if (!user) {
-            throw new Error('User does not exist!');
-        }
-        console.log(user);
-        const isEqual = await bcrypt.compare(password, user.password);
-        if (!isEqual) {
-            throw new Error('Username/Email or password entered are incorrect!!!');
-        }
+        try {
+            const foundUser = await User.findOne({ emailAddress: emailAddress });
+            if (!foundUser) {
+                throw new Error('User does not exist!');
+            }
 
-        const generatedToekn = jwt.sign({ userId: user.id, emailAddress: user.emailAddress }, privateKey, {
-            expiresIn: '1h'
-        });
+            const isEqual = await bcrypt.compare(password, foundUser.password);
+            if (!isEqual) {
+                throw new Error('Username/Email or password entered are incorrect!!!');
+            }
 
-        return {
-            userId: user.id,
-            token: generatedToekn,
-            expiration: 1
-        };
+            const generatedToken = jwt.sign({ userId: foundUser.id, emailAddress: foundUser.emailAddress }, privateKey, {
+                expiresIn: '1h'
+            });
+
+            const authData = {
+                userId: foundUser.id,
+                token: generatedToken,
+                expiration: 1,
+                permissionId: foundUser.permissionId.toString(),
+                userTypeId: foundUser.userTypeId.toString()
+            }
+
+            console.log(authData);
+            return authData;
+        }
+        catch (err) {
+            throw new Error(err);
+        }
     }
 };

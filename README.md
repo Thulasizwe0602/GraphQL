@@ -9,3 +9,7 @@ API Server Setup
 4. npm install --save express-graphql graphql
 5. npm install --save mongoose
 6. npm install --save bcryptjs
+7. npm install --save jsonwebtoken
+
+
+quotes, packages do not need to user to be authorized
