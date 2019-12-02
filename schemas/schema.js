@@ -46,6 +46,12 @@ module.exports = buildSchema(`
             _id: ID!
             cityName: String!
         }
+
+        type Province {
+            _id: ID!            
+            provinceName: String!
+            cities: [City!]!
+        }
         
         input PermissionInput {
             permissionName: String!
@@ -83,6 +89,11 @@ module.exports = buildSchema(`
             cityName: String!
         }
 
+        input ProvinceInput {
+            provinceName: String!
+            cities: [String!]!
+        }
+
         type RootQuery {
             permissions: [Permission]
             userTypes: [UserType]            
@@ -91,16 +102,17 @@ module.exports = buildSchema(`
             services: [Service]
             servicePackages: [ServicePackage]
             cities: [City]
+            provinces: [Province]
         }
 
         type RootMutation {
             createPermission(permissionInput: PermissionInput): Permission
             createUserType(userTypeInput: UserTypeInput): UserType
             createUser(userInput: UserInput): User
-            createService(serviceInput: ServiceInput): Service            
+            createService(serviceInput: ServiceInput): Service
             createServicePackage(servicePackageInput: ServicePackageInput): ServicePackage
             createCity(cityInput: CityInput): City
-            deletePermission(permissionInput: PermissionInput) : Permission
+            createProvince(provinceInput: ProvinceInput): Province
         }
 
         schema {

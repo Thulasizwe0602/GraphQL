@@ -4,6 +4,7 @@ const permissionResolver = require('./permission');
 const serviceResolver = require('./service');
 const servicePackageResolver = require('./servicePackage');
 const cityResolver = require('./city');
+const provinceResolver = require('./province');
 
 const rootResolver = {
     ...userResolver,
@@ -11,7 +12,8 @@ const rootResolver = {
     ...permissionResolver,
     ...serviceResolver,
     ...servicePackageResolver,
-    ...cityResolver
+    ...cityResolver,
+    ...provinceResolver
 };
 
 module.exports = rootResolver;

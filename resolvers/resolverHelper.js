@@ -1,6 +1,7 @@
 const UserType = require('../models/userType');
 const Permission = require('../models/permission');
 const Service = require('../models/service');
+const City = require('../models/city');
 
 const {dateToString} = require('../helpers/helper');
 
@@ -46,6 +47,25 @@ const serviceFindById = async serviceIds => {
     
 }
 
+const cityFindById = async cityIds => {
+    return await City.find({_id: {$in:cityIds}})
+    .then(cities => {
+        return cities.map(city => {
+            return {
+                ...city._doc,
+                _id: city.id,
+                cityName: city.cityName
+            }
+        });
+    })
+    .catch(err => {
+        throw new Error(err);
+    });
+
+    
+}
+
 exports.userType = userTypeFindById;
 exports.permission = permissionFindById;
 exports.serviceList = serviceFindById;
+exports.cityList = cityFindById;
