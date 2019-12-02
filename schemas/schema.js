@@ -41,6 +41,11 @@ module.exports = buildSchema(`
             servicePackageName: String!
             services: [Service!]!
         }
+
+        type City {
+            _id: ID!
+            cityName: String!
+        }
         
         input PermissionInput {
             permissionName: String!
@@ -74,6 +79,10 @@ module.exports = buildSchema(`
             services: [String!]!
         }
 
+        input CityInput {
+            cityName: String!
+        }
+
         type RootQuery {
             permissions: [Permission]
             userTypes: [UserType]            
@@ -81,6 +90,7 @@ module.exports = buildSchema(`
             login(emailAddress: String!, password: String!): AuthData
             services: [Service]
             servicePackages: [ServicePackage]
+            cities: [City]
         }
 
         type RootMutation {
@@ -89,6 +99,7 @@ module.exports = buildSchema(`
             createUser(userInput: UserInput): User
             createService(serviceInput: ServiceInput): Service            
             createServicePackage(servicePackageInput: ServicePackageInput): ServicePackage
+            createCity(cityInput: CityInput): City
             deletePermission(permissionInput: PermissionInput) : Permission
         }
 
