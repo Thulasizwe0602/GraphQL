@@ -54,6 +54,7 @@ module.exports = buildSchema(`
             createPermission(permissionInput: PermissionInput): Permission
             createUserType(userTypeInput: UserTypeInput): UserType
             createUser(userInput: UserInput): User
+            deletePermission(permissionInput: PermissionInput) : Permission
         }
 
         schema {
