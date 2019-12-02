@@ -1,9 +1,10 @@
 const User = require('../models/user');
-const { dateToString } = require('../helpers/helper');
+const { dateToString, privateKey } = require('../helpers/helper');
 const { userType, permission } = require('./resolverHelper');
-
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+
+const newDate = new Date().toISOString();;
 
 module.exports = {
     users: async () => {
@@ -33,6 +34,7 @@ module.exports = {
             }
             const encryptedPassword = await bcrypt.hash(args.userInput.password, 12);
             console.log("Successfully encrypted your password");
+
             const user = new User({
                 firstName: args.userInput.firstName,
                 lastName: args.userInput.lastName,
@@ -41,8 +43,8 @@ module.exports = {
                 cellphoneNumber: args.userInput.cellphoneNumber,
                 isProfileUpdated: args.userInput.isProfileUpdated,
                 isActive: args.userInput.isActive,
-                createdAt: new Date().toISOString(),
-                updatedAt: new Date().toISOString(),
+                createdAt: newDate,
+                updatedAt: newDate,
                 userTypeId: '5de3d5650ed14e442c93402e',
                 permissionId: '5de3c0d7bc849a4cb0088bf3',
             });
@@ -75,7 +77,6 @@ module.exports = {
             throw new Error('Username/Email or password entered are incorrect!!!');
         }
 
-        let privateKey = 'FO1gVUgiTwmw5nl9Ml3k33FFTblDNDEG';
         const generatedToekn = jwt.sign({ userId: user.id, emailAddress: user.emailAddress }, privateKey, {
             expiresIn: '1h'
         });
