@@ -12,12 +12,12 @@ module.exports = {
         catch (err) {
             console.log(err);
         }
-     },
+    },
     createService: async args => {
         const service = new Service({
             serviceName: args.serviceInput.serviceName
         });
-        
+
         try {
             const result = await service.save();
             console.log(result);

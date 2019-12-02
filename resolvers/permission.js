@@ -1,15 +1,15 @@
 const Permission = require('../models/permission');
-const {dateToString} = require('../helpers/helper');
+const { dateToString } = require('../helpers/helper');
 
 module.exports = {
     permissions: async () => {
-       try {
+        try {
             const permissions = await Permission.find();
-             return permissions.map(permission => {
-                return { 
+            return permissions.map(permission => {
+                return {
                     ...permission._doc,
                     createdAt: dateToString(permission._doc.createdAt)
-                 };
+                };
             });
         }
         catch (err) {
@@ -22,7 +22,7 @@ module.exports = {
             permissionName: args.permissionInput.permissionName,
             createdAt: new Date().toISOString()
         });
-        
+
         try {
             const result = await permission.save();
             console.log(result);
@@ -38,9 +38,9 @@ module.exports = {
         try {
             const permission = await Permission.findById(args.permissionInput.permissionId);
             if (permission) {
-                await Permission.deleteOne({id: args.permissionInput.permissionId });
+                await Permission.deleteOne({ id: args.permissionInput.permissionId });
             }
-        } catch(err){
+        } catch (err) {
             throw err;
         };
     }

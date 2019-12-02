@@ -12,12 +12,12 @@ module.exports = {
         catch (err) {
             console.log(err);
         }
-     },
+    },
     createUserType: async args => {
         const userType = new UserType({
             userTypeName: args.userTypeInput.userTypeName
         });
-        
+
         try {
             const result = await userType.save();
             console.log(result);

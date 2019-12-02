@@ -9,7 +9,7 @@ const servicePackageSchema = new Schema({
     services: [{
         type: Schema.Types.ObjectID,
         ref: 'Service',
-        required : true   
+        required: true
     }]
 });
 

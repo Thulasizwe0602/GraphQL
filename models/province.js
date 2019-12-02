@@ -9,7 +9,7 @@ const provinceSchema = new Schema({
     cities: [{
         type: Schema.Types.ObjectID,
         ref: 'City',
-        required : true   
+        required: true
     }]
 });
 

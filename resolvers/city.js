@@ -12,12 +12,12 @@ module.exports = {
         catch (err) {
             console.log(err);
         }
-     },
+    },
     createCity: async args => {
         const city = new City({
             cityName: args.cityInput.cityName
         });
-        
+
         try {
             const createdCity = await city.save();
             console.log(createdCity);

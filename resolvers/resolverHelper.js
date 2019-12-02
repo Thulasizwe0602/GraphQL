@@ -5,7 +5,7 @@ const ServicePackage = require('../models/servicePackage');
 const Province = require('../models/province');
 const City = require('../models/city');
 
-const {dateToString} = require('../helpers/helper');
+const { dateToString } = require('../helpers/helper');
 
 
 const userTypeFindById = async userTypeId => {
@@ -32,39 +32,39 @@ const permissionFindById = async permissionId => {
 }
 
 const serviceFindById = async serviceIds => {
-    return await Service.find({_id: {$in:serviceIds}})
-    .then(services => {
-        return services.map(service => {
-            return {
-                ...service._doc,
-                _id: service.id,
-                serviceName: service.serviceName
-            }
+    return await Service.find({ _id: { $in: serviceIds } })
+        .then(services => {
+            return services.map(service => {
+                return {
+                    ...service._doc,
+                    _id: service.id,
+                    serviceName: service.serviceName
+                }
+            });
+        })
+        .catch(err => {
+            throw new Error(err);
         });
-    })
-    .catch(err => {
-        throw new Error(err);
-    });
 
-    
+
 }
 
 const citiesFindById = async cityIds => {
-    return await City.find({_id: {$in:cityIds}})
-    .then(cities => {
-        return cities.map(city => {
-            return {
-                ...city._doc,
-                _id: city.id,
-                cityName: city.cityName
-            }
+    return await City.find({ _id: { $in: cityIds } })
+        .then(cities => {
+            return cities.map(city => {
+                return {
+                    ...city._doc,
+                    _id: city.id,
+                    cityName: city.cityName
+                }
+            });
+        })
+        .catch(err => {
+            throw new Error(err);
         });
-    })
-    .catch(err => {
-        throw new Error(err);
-    });
 
-    
+
 }
 
 const servicePackageFindById = async servicePackageId => {

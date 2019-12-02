@@ -24,17 +24,17 @@ const quotationSchema = new Schema({
     servicePackageId: {
         type: Schema.Types.ObjectID,
         ref: 'ServincePackage',
-        required : true
+        required: true
     },
     provinceId: {
         type: Schema.Types.ObjectID,
         ref: 'Province',
-        required : true
+        required: true
     },
-    cityId: {        
+    cityId: {
         type: Schema.Types.ObjectID,
         ref: 'City',
-        required : true
+        required: true
     },
     createdAt: {
         type: Date

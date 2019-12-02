@@ -40,7 +40,7 @@ module.exports = {
             // if (!request.isAuthorized) {
             //     throw new Error('User not authenticated.');
             // }
-            
+
             // console.log(request.permissionId);
             // console.log(request.userTypeId);
 

@@ -18,13 +18,13 @@ module.exports = {
         catch (err) {
             console.log(err);
         }
-     },
-     createProvince: async args => {
+    },
+    createProvince: async args => {
         const province = new Province({
             provinceName: args.provinceInput.provinceName,
             cities: args.provinceInput.cities
         });
-        
+
         try {
             const result = await province.save();
             console.log(result);

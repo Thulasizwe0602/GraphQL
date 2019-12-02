@@ -4,23 +4,23 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
     firstName: {
         type: String,
-        required : true
+        required: true
     },
     lastName: {
         type: String,
-        required : true
+        required: true
     },
     emailAddress: {
         type: String,
-        required : true
+        required: true
     },
     password: {
         type: String,
-        required : true
+        required: true
     },
     cellphoneNumber: {
         type: String,
-        required : false
+        required: false
     },
     isProfileUpdated: {
         type: Boolean
@@ -37,13 +37,13 @@ const userSchema = new Schema({
     userTypeId: {
         type: Schema.Types.ObjectID,
         ref: 'UserType',
-        required : true
+        required: true
     },
-    permissionId: {        
+    permissionId: {
         type: Schema.Types.ObjectID,
         ref: 'Permission',
-        required : true
-    },    
+        required: true
+    },
 });
 
 module.exports = mongoose.model('User', userSchema);

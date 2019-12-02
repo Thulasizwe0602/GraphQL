@@ -18,13 +18,13 @@ module.exports = {
         catch (err) {
             console.log(err);
         }
-     },
-     createServicePackage: async args => {
+    },
+    createServicePackage: async args => {
         const servicePackage = new ServicePackage({
             servicePackageName: args.servicePackageInput.servicePackageName,
             services: args.servicePackageInput.services
         });
-        
+
         try {
             const result = await servicePackage.save();
             console.log(result);

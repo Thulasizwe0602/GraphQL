@@ -5,7 +5,7 @@ const permissionSchema = new Schema({
     permissionName: {
         type: String,
         required: true
-    },   
+    },
     createdAt: {
         type: Date
     }
