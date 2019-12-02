@@ -5,6 +5,7 @@ const serviceResolver = require('./service');
 const servicePackageResolver = require('./servicePackage');
 const cityResolver = require('./city');
 const provinceResolver = require('./province');
+const quotationResolver = require('./quotation');
 
 const rootResolver = {
     ...userResolver,
@@ -13,7 +14,8 @@ const rootResolver = {
     ...serviceResolver,
     ...servicePackageResolver,
     ...cityResolver,
-    ...provinceResolver
+    ...provinceResolver,
+    ...quotationResolver
 };
 
 module.exports = rootResolver;

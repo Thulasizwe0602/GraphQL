@@ -5,10 +5,12 @@ module.exports = buildSchema(`
             permissionName: String!
             createdAt: String
         }
+
         type UserType {
             _id: ID!
             userTypeName: String!
         }
+
         type User {
             _id: ID!
             firstName: String!
@@ -23,6 +25,7 @@ module.exports = buildSchema(`
             userTypeId: UserType!
             permissionId: Permission!
         }
+
         type AuthData {
             userId: ID!
             token: String!
@@ -51,6 +54,20 @@ module.exports = buildSchema(`
             _id: ID!            
             provinceName: String!
             cities: [City!]!
+        }
+
+        type Quotation {
+            _id: ID!
+            firstName: String!
+            lastName: String!
+            emailAddress: String
+            phoneNumber: String!
+            isClosed: Boolean
+            createdAt: String
+            updatedAt: String
+            servicePackageId: ServicePackage!
+            provinceId: Province!            
+            cityId: City!
         }
         
         input PermissionInput {
@@ -94,6 +111,19 @@ module.exports = buildSchema(`
             cities: [String!]!
         }
 
+        input QuotationInput {
+            firstName: String!
+            lastName: String!
+            emailAddress: String
+            phoneNumber: String!
+            isClosed: Boolean
+            createdAt: String
+            updatedAt: String
+            servicePackageId: String
+            provinceId: String
+            cityId: String        
+        }
+
         type RootQuery {
             permissions: [Permission]
             userTypes: [UserType]            
@@ -103,6 +133,7 @@ module.exports = buildSchema(`
             servicePackages: [ServicePackage]
             cities: [City]
             provinces: [Province]
+            quotations: [Quotation]
         }
 
         type RootMutation {
@@ -113,6 +144,7 @@ module.exports = buildSchema(`
             createServicePackage(servicePackageInput: ServicePackageInput): ServicePackage
             createCity(cityInput: CityInput): City
             createProvince(provinceInput: ProvinceInput): Province
+            createQuotation(quotationInput: QuotationInput): Quotation
         }
 
         schema {
