@@ -35,14 +35,22 @@ module.exports = buildSchema(`
             _id: ID!
             serviceName: String!
         }
+
+        type ServicePackage {
+            _id: ID!            
+            servicePackageName: String!
+            services: [Service!]!
+        }
         
         input PermissionInput {
             permissionName: String!
             createdAt: String
         }
+
         input UserTypeInput {
             userTypeName: String!
         }
+
         input UserInput {
             firstName: String!
             lastName: String!
@@ -56,8 +64,14 @@ module.exports = buildSchema(`
             userTypeId: String
             permissionId: String
         }
+
         input ServiceInput {
             serviceName: String!
+        }
+
+        input ServicePackageInput {
+            servicePackageName: String!
+            services: [String!]!
         }
 
         type RootQuery {
@@ -66,13 +80,15 @@ module.exports = buildSchema(`
             users: [User]
             login(emailAddress: String!, password: String!): AuthData
             services: [Service]
+            servicePackages: [ServicePackage]
         }
 
         type RootMutation {
             createPermission(permissionInput: PermissionInput): Permission
             createUserType(userTypeInput: UserTypeInput): UserType
             createUser(userInput: UserInput): User
-            createService(serviceInput: ServiceInput): Service
+            createService(serviceInput: ServiceInput): Service            
+            createServicePackage(servicePackageInput: ServicePackageInput): ServicePackage
             deletePermission(permissionInput: PermissionInput) : Permission
         }
 
