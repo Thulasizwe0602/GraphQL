@@ -23,11 +23,12 @@ module.exports = buildSchema(`
             userTypeId: UserType!
             permissionId: Permission!
         }
-
         type AuthData {
             userId: ID!
             token: String!
-            expiration: Int!
+            expiration: Int!            
+            userTypeId: String!
+            permissionId: String!
         }
         
         input PermissionInput {
