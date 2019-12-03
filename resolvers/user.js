@@ -3,11 +3,10 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
 
-const Permission = require('../models/permission');
 const { dateToString, privateKey } = require('../helpers/helper');
 const { userType, permission } = require('./resolverHelper');
 
-const newDate = new Date().toISOString();;
+const newDate = new Date().toISOString();
 
 module.exports = {
     users: async (args, request) => {
@@ -44,7 +43,7 @@ module.exports = {
             // console.log(request.permissionId);
             // console.log(request.userTypeId);
 
-            const duplicateUser = await User.findOne({ emailAddress: args.userInput.emailAddress });
+            const duplicateUser = await User.findOne({ email: args.userInput.email });
             if (duplicateUser) {
                 throw new Error('Email address already exist in the system.');
             }
@@ -55,9 +54,9 @@ module.exports = {
             const user = new User({
                 firstName: args.userInput.firstName,
                 lastName: args.userInput.lastName,
-                emailAddress: args.userInput.emailAddress,
+                email: args.userInput.email,
                 password: encryptedPassword,
-                cellphoneNumber: args.userInput.cellphoneNumber,
+                phoneNumber: args.userInput.phoneNumber,
                 isProfileUpdated: args.userInput.isProfileUpdated,
                 isActive: args.userInput.isActive,
                 createdAt: newDate,
@@ -84,9 +83,9 @@ module.exports = {
         }
     },
 
-    login: async ({ emailAddress, password }) => {
+    login: async ({ email, password }) => {
         try {
-            const foundUser = await User.findOne({ emailAddress: emailAddress });
+            const foundUser = await User.findOne({ email: email });
             if (!foundUser) {
                 throw new Error('User does not exist!');
             }
@@ -96,7 +95,7 @@ module.exports = {
                 throw new Error('Username/Email or password entered are incorrect!!!');
             }
 
-            const generatedToken = jwt.sign({ userId: foundUser.id, emailAddress: foundUser.emailAddress }, privateKey, {
+            const generatedToken = jwt.sign({ userId: foundUser.id, email: foundUser.email }, privateKey, {
                 expiresIn: '1h'
             });
 
