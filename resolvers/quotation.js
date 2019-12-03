@@ -19,7 +19,7 @@ module.exports = {
                     _id: quotation.id,
                     firstName: quotation.firstName,
                     lastName: quotation.lastName,
-                    emailAddress: quotation.emailAddress,
+                    email: quotation.email,
                     phoneNumber: quotation.phoneNumber,
                     isClosed: quotation.isClosed,
                     createdAt: dateToString(quotation._doc.createdAt),
@@ -41,7 +41,7 @@ module.exports = {
             const quotation = new Quotation({
                 firstName: args.quotationInput.firstName,
                 lastName: args.quotationInput.lastName,
-                emailAddress: args.quotationInput.emailAddress,
+                email: args.quotationInput.email,
                 phoneNumber: args.quotationInput.phoneNumber,
                 isClosed: false,
                 createdAt: newDate,

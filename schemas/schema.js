@@ -60,7 +60,7 @@ module.exports = buildSchema(`
             _id: ID!
             firstName: String!
             lastName: String!
-            emailAddress: String
+            email: String
             phoneNumber: String!
             isClosed: Boolean
             createdAt: String
@@ -162,7 +162,7 @@ module.exports = buildSchema(`
         input QuotationInput {
             firstName: String!
             lastName: String!
-            emailAddress: String
+            email: String
             phoneNumber: String!
             isClosed: Boolean
             createdAt: String
@@ -216,7 +216,7 @@ module.exports = buildSchema(`
             permissions: [Permission]
             userTypes: [UserType]
             users: [User]
-            login(emailAddress: String!, password: String!): AuthData
+            login(email: String!, password: String!): AuthData
             services: [Service]
             servicePackages: [ServicePackage]
             cities: [City]
