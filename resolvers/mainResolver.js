@@ -9,6 +9,7 @@ const quotationResolver = require('./quotation');
 const departmentResolver = require('./department');
 const feedbackTypeResolver = require('./feedbackType');
 const titleResolver = require('./title');
+const genderResolver = require('./gender');
 
 const rootResolver = {
     ...userResolver,
@@ -21,7 +22,8 @@ const rootResolver = {
     ...quotationResolver,
     ...departmentResolver,
     ...feedbackTypeResolver,
-    ...titleResolver
+    ...titleResolver,
+    ...genderResolver
 };
 
 module.exports = rootResolver;

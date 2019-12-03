@@ -86,6 +86,11 @@ module.exports = buildSchema(`
         type Title {
             _id: ID!
             titleName: String!
+        }        
+
+        type Gender {
+            _id: ID!
+            genderName: String!
         }
         
         input PermissionInput {
@@ -157,6 +162,10 @@ module.exports = buildSchema(`
             titleName: String!
         }
 
+        input GenderInput {
+            genderName: String!
+        }
+
         type RootQuery {
             permissions: [Permission]
             userTypes: [UserType]            
@@ -169,7 +178,8 @@ module.exports = buildSchema(`
             quotations: [Quotation]
             departments: [Department]
             feedbackTypes: [FeedbackType]
-            titles: [Title]    
+            titles: [Title]            
+            genders: [Gender]  
         }
 
         type RootMutation {
@@ -184,6 +194,7 @@ module.exports = buildSchema(`
             createDepartment(departmentInput: DepartmentInput): Department
             createFeedbackType(feedbackTypeInput: FeedbackTypeInput): FeedbackType
             createTitle(titleInput: TitleInput): Title
+            createGender(genderInput: GenderInput): Gender
         }
 
         schema {
