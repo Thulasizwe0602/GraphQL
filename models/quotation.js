@@ -10,7 +10,7 @@ const quotationSchema = new Schema({
         type: String,
         required: true
     },
-    emailAddress: {
+    email: {
         type: String,
         required: false
     },
