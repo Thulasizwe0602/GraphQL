@@ -29,7 +29,7 @@ module.exports = buildSchema(`
         type AuthData {
             userId: ID!
             token: String!
-            expiration: Int!            
+            expiration: Int!
             userTypeId: String!
             permissionId: String!
         }
@@ -40,7 +40,7 @@ module.exports = buildSchema(`
         }
 
         type ServicePackage {
-            _id: ID!            
+            _id: ID!
             servicePackageName: String!
             services: [Service!]!
         }
@@ -66,7 +66,7 @@ module.exports = buildSchema(`
             createdAt: String
             updatedAt: String
             servicePackageId: ServicePackage!
-            provinceId: Province!            
+            provinceId: Province!
             cityId: City!
         }
 
@@ -81,12 +81,12 @@ module.exports = buildSchema(`
         type FeedbackType {
             _id: ID!
             feedbackTypeName: String!
-        }        
+        }
 
         type Title {
             _id: ID!
             titleName: String!
-        }        
+        }
 
         type Gender {
             _id: ID!
@@ -97,10 +97,25 @@ module.exports = buildSchema(`
             _id: ID!
             policyNumber: String!
             userId: User!
-            genderId: Gender!            
-            titleId: Title!            
+            genderId: Gender!
+            titleId: Title!
             createdAt: String
             updatedAt: String
+        }
+
+        type Feedback {
+            _id: ID!
+            name: String!
+            email: String
+            phoneNumber: String!
+            idNumber: String
+            isClosed: Boolean
+            feedback: String
+            createdAt: String
+            updatedAt: String
+            policyId: Policy!
+            departmentId: Department!
+            feedbackTypeId: FeedbackType
         }
         
         input PermissionInput {
@@ -154,7 +169,7 @@ module.exports = buildSchema(`
             updatedAt: String
             servicePackageId: String
             provinceId: String
-            cityId: String        
+            cityId: String
         }
 
         input DepartmentInput {
@@ -179,13 +194,27 @@ module.exports = buildSchema(`
         input PolicyInput {
             policyNumber: String
             userId: String
-            genderId: String            
+            genderId: String
             titleId: String
+        }
+
+        input FeedbackInput {
+            name: String!
+            email: String
+            phoneNumber: String!
+            idNumber: String
+            isClosed: Boolean
+            feedback: String
+            createdAt: String
+            updatedAt: String
+            policyId: String
+            departmentId: String
+            feedbackTypeId: String
         }
 
         type RootQuery {
             permissions: [Permission]
-            userTypes: [UserType]            
+            userTypes: [UserType]
             users: [User]
             login(emailAddress: String!, password: String!): AuthData
             services: [Service]
@@ -195,9 +224,10 @@ module.exports = buildSchema(`
             quotations: [Quotation]
             departments: [Department]
             feedbackTypes: [FeedbackType]
-            titles: [Title]            
-            genders: [Gender]           
-            policies: [Policy] 
+            titles: [Title]
+            genders: [Gender]
+            policies: [Policy]
+            feedbacks: [Feedback]
         }
 
         type RootMutation {
@@ -212,8 +242,9 @@ module.exports = buildSchema(`
             createDepartment(departmentInput: DepartmentInput): Department
             createFeedbackType(feedbackTypeInput: FeedbackTypeInput): FeedbackType
             createTitle(titleInput: TitleInput): Title
-            createGender(genderInput: GenderInput): Gender            
+            createGender(genderInput: GenderInput): Gender
             createPolicy(policyInput: PolicyInput): Policy
+            createFeedBack(feedbackInput: FeedbackInput): Feedback
         }
 
         schema {

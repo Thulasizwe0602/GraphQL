@@ -11,6 +11,7 @@ const feedbackTypeResolver = require('./feedbackType');
 const titleResolver = require('./title');
 const genderResolver = require('./gender');
 const policyResolver = require('./policy');
+const feedbackResolver = require('./feedback');
 
 const rootResolver = {
     ...userResolver,
@@ -25,7 +26,8 @@ const rootResolver = {
     ...feedbackTypeResolver,
     ...titleResolver,
     ...genderResolver,
-    ...policyResolver
+    ...policyResolver,
+    ...feedbackResolver
 };
 
 module.exports = rootResolver;

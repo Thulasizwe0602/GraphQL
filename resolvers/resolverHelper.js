@@ -7,6 +7,9 @@ const City = require('../models/city');
 const User = require('../models/user');
 const Gender = require('../models/gender');
 const Title = require('../models/title');
+const Policy = require('../models/policy');
+const Department = require('../models/department');
+const FeedbackType = require('../models/feedbackType');
 
 const { dateToString } = require('../helpers/helper');
 
@@ -134,6 +137,36 @@ const titleFindById = async titleId => {
     }
 }
 
+const policyFindById = async policyId => {
+    try {
+        const policy = await Policy.findById(policyId);
+        return { ...policy._doc };
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
+const departmentFindById = async departmentId => {
+    try {
+        const department = await Department.findById(departmentId);
+        return { ...department._doc };
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
+const feedbackTypeFindById = async feedbackTypeId => {
+    try {
+        const feedbackType = await FeedbackType.findById(feedbackTypeId);
+        return { ...feedbackType._doc };
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
 exports.userType = userTypeFindById;
 exports.permission = permissionFindById;
 exports.serviceList = serviceFindById;
@@ -144,3 +177,6 @@ exports.city = cityFindById;
 exports.user = userFindById;
 exports.title = titleFindById;
 exports.gender = genderFindById;
+exports.policy = policyFindById;
+exports.department = departmentFindById;
+exports.feedbackType = feedbackTypeFindById;
