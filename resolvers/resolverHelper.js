@@ -4,6 +4,7 @@ const Service = require('../models/service');
 const ServicePackage = require('../models/servicePackage');
 const Province = require('../models/province');
 const City = require('../models/city');
+const User = require('../models/user');
 
 const { dateToString } = require('../helpers/helper');
 
@@ -103,6 +104,16 @@ const cityFindById = async cityId => {
     }
 }
 
+const userFindById = async userId => {
+    try {
+        const user = await User.findById(userId);
+        return { ...user._doc };
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
 exports.userType = userTypeFindById;
 exports.permission = permissionFindById;
 exports.serviceList = serviceFindById;
@@ -110,3 +121,4 @@ exports.cityList = citiesFindById;
 exports.package = servicePackageFindById;
 exports.province = provinceFindById;
 exports.city = cityFindById;
+exports.user = userFindById;

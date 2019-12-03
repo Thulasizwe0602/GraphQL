@@ -15,9 +15,9 @@ module.exports = buildSchema(`
             _id: ID!
             firstName: String!
             lastName: String!
-            emailAddress: String!
+            email: String!
             password: String
-            cellPhoneNumber: String
+            phoneNumber: String
             isProfileUpdated: Boolean
             isActive: Boolean
             createdAt: String
@@ -69,6 +69,14 @@ module.exports = buildSchema(`
             provinceId: Province!            
             cityId: City!
         }
+
+        type Department {
+            _id: ID!
+            departmentName: String!
+            createdAt: String!
+            updatedAt: String!
+            lineManagerId: User!
+        }
         
         input PermissionInput {
             permissionName: String!
@@ -82,9 +90,9 @@ module.exports = buildSchema(`
         input UserInput {
             firstName: String!
             lastName: String!
-            emailAddress: String!
+            email: String!
             password: String!
-            cellPhoneNumber: String
+            phoneNumber: String
             isProfileUpdated: Boolean
             isActive: Boolean
             createdAt: String
@@ -124,6 +132,13 @@ module.exports = buildSchema(`
             cityId: String        
         }
 
+        input DepartmentInput {
+            departmentName: String!
+            createdAt: String
+            updatedAt: String
+            lineManagerId: String
+        }
+
         type RootQuery {
             permissions: [Permission]
             userTypes: [UserType]            
@@ -134,6 +149,7 @@ module.exports = buildSchema(`
             cities: [City]
             provinces: [Province]
             quotations: [Quotation]
+            departments: [Department]
         }
 
         type RootMutation {
@@ -145,6 +161,7 @@ module.exports = buildSchema(`
             createCity(cityInput: CityInput): City
             createProvince(provinceInput: ProvinceInput): Province
             createQuotation(quotationInput: QuotationInput): Quotation
+            createDepartment(departmentInput: DepartmentInput): Department
         }
 
         schema {
