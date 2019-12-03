@@ -5,6 +5,8 @@ const ServicePackage = require('../models/servicePackage');
 const Province = require('../models/province');
 const City = require('../models/city');
 const User = require('../models/user');
+const Gender = require('../models/gender');
+const Title = require('../models/title');
 
 const { dateToString } = require('../helpers/helper');
 
@@ -47,7 +49,6 @@ const serviceFindById = async serviceIds => {
             throw new Error(err);
         });
 
-
 }
 
 const citiesFindById = async cityIds => {
@@ -64,7 +65,6 @@ const citiesFindById = async cityIds => {
         .catch(err => {
             throw new Error(err);
         });
-
 
 }
 
@@ -114,6 +114,26 @@ const userFindById = async userId => {
     }
 }
 
+const genderFindById = async genderId => {
+    try {
+        const gender = await Gender.findById(genderId);
+        return { ...gender._doc };
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
+const titleFindById = async titleId => {
+    try {
+        const title = await Title.findById(titleId);
+        return { ...title._doc };
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
 exports.userType = userTypeFindById;
 exports.permission = permissionFindById;
 exports.serviceList = serviceFindById;
@@ -122,3 +142,5 @@ exports.package = servicePackageFindById;
 exports.province = provinceFindById;
 exports.city = cityFindById;
 exports.user = userFindById;
+exports.title = titleFindById;
+exports.gender = genderFindById;
