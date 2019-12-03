@@ -7,6 +7,7 @@ const cityResolver = require('./city');
 const provinceResolver = require('./province');
 const quotationResolver = require('./quotation');
 const departmentResolver = require('./department');
+const feedbackTypeResolver = require('./feedbackType');
 
 const rootResolver = {
     ...userResolver,
@@ -17,7 +18,8 @@ const rootResolver = {
     ...cityResolver,
     ...provinceResolver,
     ...quotationResolver,
-    ...departmentResolver
+    ...departmentResolver,
+    ...feedbackTypeResolver
 };
 
 module.exports = rootResolver;

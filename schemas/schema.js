@@ -77,6 +77,11 @@ module.exports = buildSchema(`
             updatedAt: String!
             lineManagerId: User!
         }
+
+        type FeedbackType {
+            _id: ID!
+            feedbackTypeName: String!
+        }
         
         input PermissionInput {
             permissionName: String!
@@ -139,6 +144,10 @@ module.exports = buildSchema(`
             lineManagerId: String
         }
 
+        input FeedbackTypeInput {
+            feedbackTypeName: String!
+        }
+
         type RootQuery {
             permissions: [Permission]
             userTypes: [UserType]            
@@ -150,6 +159,7 @@ module.exports = buildSchema(`
             provinces: [Province]
             quotations: [Quotation]
             departments: [Department]
+            feedbackTypes: [FeedbackType]  
         }
 
         type RootMutation {
@@ -162,6 +172,7 @@ module.exports = buildSchema(`
             createProvince(provinceInput: ProvinceInput): Province
             createQuotation(quotationInput: QuotationInput): Quotation
             createDepartment(departmentInput: DepartmentInput): Department
+            createFeedbackType(feedbackTypeInput: FeedbackTypeInput): FeedbackType
         }
 
         schema {
