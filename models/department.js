@@ -19,7 +19,7 @@ const departmentSchema = new Schema({
         ref: 'User',
         required: true
     },
-    
+
 });
 
 module.exports = mongoose.model('department', departmentSchema);

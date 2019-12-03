@@ -9,13 +9,13 @@ module.exports = {
         try {
             const departments = await Department.find();
             return departments.map(department => {
-                return { 
+                return {
                     ...department._doc,
                     departmentName: department.departmentName,
                     createdAt: dateToString(department._doc.createdAt),
                     updatedAt: dateToString(department._doc.updatedAt),
                     lineManagerId: user.bind(this, department._doc.lineManagerId),
-                 };
+                };
             });
         }
         catch (err) {
