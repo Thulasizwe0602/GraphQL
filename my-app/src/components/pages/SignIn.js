@@ -1,5 +1,7 @@
 import React from 'react';
 import { MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody, MDBModalFooter, MDBIcon } from 'mdbreact';
+import { NavLink } from 'react-router-dom';
+import logo from "../../assets/mdb-react.png";
 
 class SignIn extends React.Component {
 
@@ -78,6 +80,7 @@ class SignIn extends React.Component {
           <MDBCard>
             <MDBCardBody className="mx-4">
               <div className="text-center">
+                <img alt="Infinity Life Logo" className="img-fluid" src={logo} />
                 <h3 className="dark-grey-text mb-5"><strong>Sign in</strong></h3>
               </div>
               <MDBInput label="Your email" group type="email" validate error="wrong" success="right" value={this.state.emailElement} onChange={this.emailChangedHandler} />
@@ -94,7 +97,7 @@ class SignIn extends React.Component {
               </div>
             </MDBCardBody>
             <MDBModalFooter className="mx-5 pt-3 mb-1">
-              <p className="grey-text d-flex justify-content-end" style={smallStyle}>Already a member? <a href="/signin" className="blue-text ml-1"> Sign In</a></p>
+            <p className="grey-text d-flex justify-content-end" style={smallStyle}>Don't have an account?<NavLink exact={true} to="/signup" className="blue-text ml-1"> Sign Up </NavLink></p>
             </MDBModalFooter>
           </MDBCard>
         </MDBCol>
