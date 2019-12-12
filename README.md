@@ -10,6 +10,6 @@ API Server Setup
 5. npm install --save mongoose
 6. npm install --save bcryptjs
 7. npm install --save jsonwebtoken
-
+8. npm install --save cors
 
 quotes, packages do not need to user to be authorized
