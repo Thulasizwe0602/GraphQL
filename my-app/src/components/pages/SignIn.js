@@ -1,9 +1,12 @@
 import React from 'react';
 import { MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody, MDBModalFooter, MDBIcon } from 'mdbreact';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect  } from 'react-router-dom';
 import logo from "../../assets/mdb-react.png";
 
+import AuthContext from '../../context/context';
 class SignIn extends React.Component {
+
+  static contextType = AuthContext;
 
   constructor(props) {
     super(props);
@@ -63,7 +66,9 @@ class SignIn extends React.Component {
       .then(resData => {
         if (resData.data.login.token) {
           this.context.login(resData.data.login.token, resData.data.login.userId, resData.data.login.expiration);
+
           console.log(resData);
+          return(<Redirect from="/signin" to="/tables" />);
         }
       })
       .catch(err => {

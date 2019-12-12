@@ -84,6 +84,7 @@ class SignUp extends React.Component {
       return response.json();
     })
       .then(resData => {
+        this.context.login("xxx", resData.data.login.userId, resData.data.login.expiration);
         console.log(resData);
       })
       .catch(err => {
