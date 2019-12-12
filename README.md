@@ -13,3 +13,7 @@ API Server Setup
 8. npm install --save cors
 
 quotes, packages do not need to user to be authorized
+
+Client side Setup
+1. npm install --save mdbreact
+2.
