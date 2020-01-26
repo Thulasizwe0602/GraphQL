@@ -5,6 +5,7 @@ import ProfilePage from './pages/ProfilePage';
 import TablesPage from './pages/TablesPage';
 import MapsPage from './pages/MapsPage';
 import Accounts from './pages/Accounts';
+import Quotations from './pages/Quotations';
 
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
@@ -38,6 +39,7 @@ class Routes extends React.Component {
           {!this.state.token && <Route path='/signin' component={SignIn} />}
           {!this.state.token && <Route path='/signup' component={SignUp} />}
           {this.state.token && <Route path='/accounts' component={Accounts} />}
+          {!this.state.token && <Route path='/quotations' component={Quotations} />}
         </Switch>
       </AuthContext.Provider>
     );
